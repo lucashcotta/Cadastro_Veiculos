@@ -1,15 +1,23 @@
 package com.lucas.cadastro_veiculos.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.lucas.cadastro_veiculos.dto.VeiculoDto;
+import com.lucas.cadastro_veiculos.entity.Veiculo;
+import com.lucas.cadastro_veiculos.repository.VeiculoRepository;
+
 import lombok.AllArgsConstructor;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
 @AllArgsConstructor
 public class VeiculoService {
+
+    @Autowired
+    private VeiculoRepository veiculRepository;
 
     private final WebClient webClient;
 
@@ -24,7 +32,13 @@ public class VeiculoService {
         .bodyToMono(String.class);
     }
 
-    
+    public VeiculoDto cadastraVeiculo(Veiculo veiculo){
+        
+        if(veiculRepository.findByCpf(veiculo.getCpf()).isPresent()){
+            
+        }
+        
+    }
 
 
 
